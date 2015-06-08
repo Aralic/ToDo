@@ -20,6 +20,7 @@ define(["min$", "util", "localStorage", "validator"], function($, _, store, vali
         constructor: Task,
 
         init: function() {
+    
             this.addTask();
             
             //任务列表 选项卡切换
@@ -36,6 +37,10 @@ define(["min$", "util", "localStorage", "validator"], function($, _, store, vali
 
             //取消修改 or 取消保存
             this.cancelSave();
+
+            //任务完成
+            this.doneTask();
+
         },
 
         //新增任务按钮
@@ -156,7 +161,7 @@ define(["min$", "util", "localStorage", "validator"], function($, _, store, vali
                 var uDl = oDl.cloneNode(true);
                 that.unDoneList.appendChild(uDl);
             }
-
+            this.updateDoneNum('newTask');
         },
 
         //任务列表 选项卡切换
@@ -224,6 +229,56 @@ define(["min$", "util", "localStorage", "validator"], function($, _, store, vali
                     that.showTaskCon();
                 }
             });
+        },
+
+        doneTask: function() {
+            var that = this;
+            _.event.addEvent($('.task-done'), 'click', function() {
+                var task = store.get(that.currentTaskId);
+                if (!task.done) {
+                    var result = window.confirm('您确认任务完成吗?');
+                    if (result) {
+                        
+                        task.done = true;
+                        store.save(task);
+
+                        var oDl = document.createElement('dl');
+                        oDl.innerHTML = '<dt>'+task.date+'</dt>'+
+                                        '<dd data-id=\"'+task.id+'\">'+task.title+'</dd>';
+                        that.doneList.appendChild(oDl);
+
+                        that.updateDoneNum('doneTask');
+                    }
+                } else {
+                    alert('此任务已完成！');
+                }
+            });
+        },
+
+        //更新目录中的 未完成任务数量 并更新本地存储
+        updateDoneNum: function(type) {
+
+            if (type == 'newTask') {
+                update(1);
+            } else if (type == 'doneTask') {
+                update(-1);
+            }
+
+            function update(x) {
+                var current = window.selected;
+                do {
+                    var num = current.querySelector('.unDoneNum');
+                    var result = parseInt(num.innerHTML.match(/\d+/));
+                    num.innerHTML = '('+(result + x)+')';
+                    var id = current.getAttribute('data-id');
+                    var data = store.get(id);
+                    data.unDoneNum = data.unDoneNum + x;
+                    store.save(data);
+                    current = current.parentNode.parentNode;
+                } while (current && current.nodeName.toUpperCase() === 'LI')
+            }
+
+
         }
     }
 
