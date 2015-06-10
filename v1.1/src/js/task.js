@@ -14,6 +14,8 @@ define(["min$", "util", "localStorage", "validator"], function($, _, store, vali
         //保存任务类型 新增任务 or 保存编辑任务
         this.taskType = null;
 
+        this.init();
+
     }
 
     Task.prototype = {
@@ -201,11 +203,17 @@ define(["min$", "util", "localStorage", "validator"], function($, _, store, vali
                 _.addClass(current, 'on');
             });
         },
+
+        //显示任务详情
         showTaskCon: function() {
             var task = store.get(this.currentTaskId);
             this.inputTitle.value = task.title;
             this.inputDate.value = task.date;
             this.inputTask.value = task.taskContent;
+
+            if (_.isMobile()) {
+                window.location.href = '#details';
+            }
         },
 
         //修改任务按钮
@@ -282,8 +290,9 @@ define(["min$", "util", "localStorage", "validator"], function($, _, store, vali
         }
     }
 
-    var t = new Task();
+    return Task;
+    //var t = new Task();
 
-    t.init();
+    //t.init();
 
 });

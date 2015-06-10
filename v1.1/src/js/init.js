@@ -11,18 +11,27 @@ define(["min$", "localStorage", "util"], function($, store, _) {
         var root = {
                 id: 'root',
                 chiId: ['defaultId'],
-                unDoneNum: 0
+                unDoneNum: 1
             },
             defaultCatalog = {
                 id: 'defaultId',
                 title: '默认分类',
                 chiId: [],
                 parId: 'root',            
-                unDoneNum: 0,
-                taskId: []
-            }; 
+                unDoneNum: 1,
+                taskId: [1111111]
+            },
+            task = {
+                id: 1111111,
+                title: '测试数据',
+                date: '2015-6-10',
+                taskContent: '测试数据',
+                parId: 'defaultCatalog',
+                done: false
+            };
         store.save(root);
-        store.save(defaultCatalog);  
+        store.save(defaultCatalog); 
+        store.save(task);
     } 
     json = store.get('root');
     $('.catalog-all span').innerHTML = "("+json.unDoneNum+")";

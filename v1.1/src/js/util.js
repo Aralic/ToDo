@@ -85,7 +85,10 @@ define([], function() {
 
             this.addClass(element, 'hide');
         },
-
+        //判断是否是手机设备
+        isMobile: function() {
+            return (/(iPhone|iPod|Android|ios|iPad)/i).test(navigator.userAgent);
+        },
         //去字符串前后空格
         trim: function(str) {
             var re = /^\s+|\s+$/g;

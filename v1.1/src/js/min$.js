@@ -1,8 +1,7 @@
-/*
-* min $
-*/ 
 define([], function() {
-   
+    /*
+    * min $
+    */ 
     return function(selector) {
         return (function $(selector) {
             //清除首尾空格

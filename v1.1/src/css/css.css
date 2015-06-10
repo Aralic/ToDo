@@ -82,8 +82,8 @@ input {
     left: 0;
 }
 
-.aside,
-.main-middle {
+.type,
+.task {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -91,19 +91,19 @@ input {
     background: #f2f2f2;
 }
 
-.aside {
+.type {
     background: #cee4fb;
     margin-left: 1px;
 }
 
-.main-middle {
+.task {
     left: 230px;
     border-left: 1px solid #8699aa;
     border-right: 1px solid #8699aa;
     background: #cee4fb;
 }
 
-.main-right {
+.details {
     position: absolute;
     top: 0;
     right: 0;
@@ -117,8 +117,8 @@ input {
     height: 34px;
     margin-top: 17px;
 }
-.aside .catalog-all,
-.aside .catalog-items {
+.type .catalog-all,
+.type .catalog-items {
     color: #000;
     font-size: 14px;
     font-weight: normal;
@@ -266,7 +266,7 @@ input {
 }
 
 /*右侧*/
-.main-right .right-top {
+.details .right-top {
     height: 51px;
     border-bottom: 1px solid #ccc;
     background: #cee4fb;
@@ -454,4 +454,115 @@ input {
 .context-menu button:hover {
     color: #000;
     background: #c0def8;
+}
+
+
+/* 动画库 from mobilebone 参考自@DIYgod*/
+.slide.out, .slide.in {
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-duration: 1000ms;
+}
+ 
+.slide.in {
+    -webkit-animation-name: slideinfromright;
+}
+ 
+.slide.out {
+    -webkit-animation-name: slideouttoleft;
+}
+ 
+.slide.reverse.out {
+    -webkit-animation-name: slideouttoright;
+}
+ 
+.slide.reverse.in {
+    -webkit-animation-name: slideinfromleft;
+}
+ 
+/* keyframes for slidein from sides */
+@-webkit-keyframes slideinfromright {
+    from {
+        -webkit-transform: translate3d(100%, 0, 0);
+    }
+    to {
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+}
+ 
+@keyframes slideinfromright {
+    from {
+        -webkit-transform: translateX(100%);
+    }
+    to {
+        -webkit-transform: translateX(0);
+    }
+}
+ 
+@-webkit-keyframes slideinfromleft {
+    from {
+        -webkit-transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+}
+ 
+@keyframes slideinfromleft {
+    from {
+        -webkit-transform: translateX(-100%);
+    }
+    to {
+        -webkit-transform: translateX(0);
+    }
+}
+ 
+/* keyframes for slideout to sides */
+@-webkit-keyframes slideouttoleft {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+    to {
+        -webkit-transform: translate3d(-100%, 0, 0);
+    }
+}
+ 
+@keyframes slideouttoleft {
+    from {
+        -webkit-transform: translateX(0);
+    }
+    to {
+        -webkit-transform: translateX(-100%);
+    }
+}
+ 
+@-webkit-keyframes slideouttoright {
+    from {
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+    to {
+        -webkit-transform: translate3d(100%, 0, 0);
+    }
+}
+ 
+@keyframes slideouttoright {
+    from {
+        -webkit-transform: translateX(0);
+    }
+    to {
+        -webkit-transform: translateX(100%);
+    }
+}
+
+@media (max-width: 640px){
+    .type,
+    .task,
+    .details {
+        width: 100%;
+        left: 0;
+        display: none;
+    }
+
+    .type {
+        display: block;
+    }
 }

@@ -1,3 +1,6 @@
+/*
+* 本地存储方法
+*/ 
 define({
     /*
     * 获取本地存储
@@ -56,20 +59,4 @@ define({
             }
         }
     }
-
-    /*
-    * 更新未完成任务数组
-    * @param {object} 
-    */ 
-    // updateUnDone: function(obj,type) {     
-    //     while (obj) {
-    //         if (type == 'add') {
-    //             obj.unDoneNum ++;    
-    //         } else if (type == 'sub') {
-    //             obj.unDoneNum --;
-    //         }
-    //         g.Data.save(obj);
-    //         obj = g.Data.get(obj.parId);
-    //     }
-    // }
 });

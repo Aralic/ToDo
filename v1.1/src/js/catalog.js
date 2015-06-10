@@ -1,9 +1,14 @@
+/*
+* 左侧目录
+*/ 
 define(["min$", "util", "localStorage"], function($, _, store) {
     function Catalog() {
         this.dialog = $('#dialog');
         this.mask = $('#mask');
         this.confirm = $('#confirm');
         this.type = null;
+
+        this.init();
     }
 
     Catalog.prototype = {
@@ -178,12 +183,12 @@ define(["min$", "util", "localStorage"], function($, _, store) {
                 _.addClass(window.selected, 'active');
 
                 //选中当前菜单，相应视图显示
-                that.reader();
+                that.render();
             });
         },
 
         //选中当前菜单，相应视图显示
-        reader: function() {
+        render: function() {
             this.showTaskList();
             var name = window.selected.getAttribute('data-id');
             var json = store.get(name);
@@ -221,6 +226,10 @@ define(["min$", "util", "localStorage"], function($, _, store) {
                 oUl.className = 'show';
                 oUl.innerHTML = str1;
                 window.selected.appendChild(oUl);
+            }
+
+            if (_.isMobile()) {
+                window.location.href = '#task';
             }
         },
 
@@ -294,6 +303,7 @@ define(["min$", "util", "localStorage"], function($, _, store) {
         }
     }
 
-    var c = new Catalog();
-    c.init();
+    return Catalog;
+    // var c = new Catalog();
+    // c.init();
 });
