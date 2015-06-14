@@ -55,6 +55,10 @@ define(["min$", "util", "localStorage", "validator"], function($, _, store, vali
                 that.editing();
                 
                 that.taskType = 'newTask';
+
+                if (_.isMobile()) {
+                    window.location.hash = 'details';
+                }
             });
         },
 
